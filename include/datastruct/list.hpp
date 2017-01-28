@@ -49,6 +49,15 @@ namespace datastruct
 
     public:
 
+        ~list() noexcept
+        {
+            while(head) {
+                node *temp = head;
+                head = head->next;
+                delete temp;
+            }
+        }
+
         // Pop item off the front of the list
         void pop()
         {
