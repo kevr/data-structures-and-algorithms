@@ -66,9 +66,6 @@ namespace radix_lsd_impl
 template<template<typename, typename...> class C, typename T>
 void radix_lsd_sort(C<T>& container)
 {
-    if(container.size() <= 1)
-        // Already sorted
-        return;
     radix_lsd_impl::_sort(container);
 }
 
