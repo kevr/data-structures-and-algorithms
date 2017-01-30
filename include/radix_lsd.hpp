@@ -7,23 +7,26 @@
 
 namespace radix_lsd_impl
 {
+    // Get the max key length in the container
     template<template<typename, typename...> class C, typename T>
     int _count(C<T>& container)
     {
-        int figs = 0;
+        int max = 0;
         for(auto& value : container) {
-            int fig = int(log10(value)) + 1;
-            if(fig > figs)
-                figs = fig;
+            int current = int(log10(value)) + 1;
+            if(current > max)
+                max = current;
         }
-        return figs;
+        return max;
     }
 
+    // A single pass on a specific digit position
     template<template<typename, typename...> class C, typename T>
     void _pass(C<T>& container, int position, const int n)
     {
+        // Should we not be here? (Base case)
         if(position > n)
-            return;
+            return; // Then end this recursion
 
         // Allocate some buckets
         std::array<std::vector<T>, 10> buckets;
@@ -37,6 +40,7 @@ namespace radix_lsd_impl
             buckets[digit].emplace_back(container[i]);
         }
 
+        // Reinsert buckets [0..9] into the original container
         int k = 0;
         for(auto& bucket : buckets) {
             for(auto& item : bucket) {
@@ -44,7 +48,7 @@ namespace radix_lsd_impl
             }
         }
 
-        // Do another pass with position + 1
+        // Try another pass with position + 1
         return _pass(container, position + 1, n);
     }
 
