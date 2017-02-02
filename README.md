@@ -5,8 +5,8 @@ Various data structures and algorithms implemented by Kevin Morris.
 ### Data Structures
 
 * Linked List [list.hpp](https://github.com/kevr/data-structures-and-algorithms/tree/master/include/datastruct/list.hpp)
-* Doubly Linked List
-* Red Black Tree
+* Stack `LIFO` [stack.hpp](https://github.com/kevr/data-structures-and-algorithms/tree/master/include/datastruct/stack.hpp)
+* Queue `FIFO` [queue.hpp](https://github.com/kevr/data-structures-and-algorithms/tree/master/include/datastruct/queue.hpp)
 
 ### Algorithms
 
