@@ -25,7 +25,7 @@ namespace datastruct
         // Push value onto the stack
         stack& push(T value)
         {
-            _list.push_front(std::move(value));
+            _list.emplace_front(std::move(value));
             return *this;
         }
 

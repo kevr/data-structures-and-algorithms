@@ -26,7 +26,7 @@ namespace datastruct
         /* Push first-in item */
         queue& push(T value)
         {
-            _list.push_back(std::move(value));
+            _list.emplace_back(std::move(value));
             return *this;
         }
 
