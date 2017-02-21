@@ -6,32 +6,42 @@
 #ifndef MERGE_HPP
 #define MERGE_HPP
 
+#include <vector>
 #include <utility>
 #include <memory>
+#include <algorithm>
 
 namespace merge_sort_impl
 {
     /**
      * @return New pivot index
     **/
+
+    template<typename T, typename U>
+    void copy_range(T& t, U& u, int p, int r)
+    {
+        auto iter_t = std::begin(t);
+        std::copy(iter_t + p, iter_t + r, std::begin(u));
+    }
+
+    template<typename T, typename U>
+    T make_copy(U& u, int p, int r)
+    {
+        T t(r - p);
+        copy_range(u, t, p, r);
+        return t;
+    }
+
     template<template<typename, typename...> class Container, typename T>
     void _merge(Container<T>& container, int p, int q, int r)
     {
         const int lhs_size = q - p + 1;
         const int rhs_size = r - q;
 
-        T *lhs = new T[lhs_size];
-        T *rhs = new T[rhs_size];
+        using vector_t = std::vector<T>;
 
-        // Just set these up to delete [] memory out of scope
-        std::unique_ptr<T[]> lhsPtr(lhs);
-        std::unique_ptr<T[]> rhsPtr(rhs);
-
-        // Fill up our array halves
-        for(int k = 0, i = p; i <= q; ++i)
-            lhs[k++] = container[i];
-        for(int k = 0, j = q + 1; j <= r; ++j)
-            rhs[k++] = container[j];
+        auto lhs = make_copy<vector_t>(container, p, q + 1);
+        auto rhs = make_copy<vector_t>(container, q + 1, r + 1);
 
         // Merge the array halves back into container
         int i = 0, j = 0, k = p;       
