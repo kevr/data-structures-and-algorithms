@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    std::vector<int> v { 6, 20, 30, 12, 10, 5, 2, 200, 212 };
+    std::vector<int> v { 66, 33, 99, 666, 333, 431, 2346, 999 };
     cout << v << endl;
 
     radix_lsd_sort(v);
